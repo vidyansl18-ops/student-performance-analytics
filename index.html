@@ -1,5 +1,4 @@
 <!DOCTYPE html>
-
 <html>
 
 <head>
@@ -43,7 +42,33 @@ Edulytics
 
 </nav>
 
+
+<!-- HERO SECTION -->
+
+<section class="hero">
+
+<h1>
+
+Student Performance Analytics Dashboard
+
+</h1>
+
+<p>
+
+Analyze student data, explore performance trends,
+and visualize insights effortlessly.
+
+</p>
+
+</section>
+
+
 <div class="container">
+
+
+<!-- STUDENT SECTION -->
+
+<section class="section-box">
 
 <h2>
 
@@ -75,9 +100,16 @@ Select Student
 
 id="studentCard">
 
-Choose a student
+Choose a student to view details.
 
 </div>
+
+</section>
+
+
+<!-- ANALYTICS -->
+
+<section class="section-box">
 
 <h2>
 
@@ -113,7 +145,7 @@ Total Marks
 
 <option value="performance">
 
-Performance
+Performance Analysis
 
 </option>
 
@@ -133,12 +165,27 @@ style="display:none;">
 
 </div>
 
+</section>
+
 </div>
+
+
+<footer>
+
+<p>
+
+Edulytics • Student Performance Analytics Project
+
+</p>
+
+</footer>
+
+
 
 <script>
 
 const students =
-{{students | tojson}};
+{{ students | tojson }};
 
 const studentCard =
 document.getElementById(
@@ -162,15 +209,15 @@ studentCard.innerHTML =
 
 <h3>${s.Name}</h3>
 
-<p>Math: ${s.Math}</p>
+<p>Math : ${s.Math}</p>
 
-<p>Physics: ${s.Physics}</p>
+<p>Physics : ${s.Physics}</p>
 
-<p>Chemistry: ${s.Chemistry}</p>
+<p>Chemistry : ${s.Chemistry}</p>
 
-<p>Attendance: ${s.Attendance}</p>
+<p>Attendance : ${s.Attendance}</p>
 
-<p>Total: ${s.Total}</p>
+<p>Total : ${s.Total}</p>
 
 `;
 
@@ -194,19 +241,19 @@ function(){
 const graphs = {
 
 avg:
-"{{url_for('static', filename='average_scores.png')}}",
+"{{ url_for('static', filename='average_scores.png') }}",
 
 attendance:
-"{{url_for('static', filename='student_attendance.png')}}",
+"{{ url_for('static', filename='student_attendance.png') }}",
 
 total:
-"{{url_for('static', filename='total_marks.png')}}",
+"{{ url_for('static', filename='total_marks.png') }}",
 
 performance:
-"{{url_for('static', filename='s_W_performance.png')}}",
+"{{ url_for('static', filename='s_W_performance.png') }}",
 
 relation:
-"{{url_for('static', filename='a_vs_tm.png')}}"
+"{{ url_for('static', filename='a_vs_tm.png') }}"
 
 };
 
