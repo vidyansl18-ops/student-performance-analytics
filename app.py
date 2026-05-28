@@ -3,35 +3,77 @@ import pandas as pd
 
 app = Flask(__name__)
 
+# Read CSV file
+
 df = pd.read_csv("students.csv")
+
+# Create total marks column
+
+df["Total"] = (
+
+    df["Math"] +
+
+    df["Physics"] +
+
+    df["Chemistry"]
+
+)
 
 # Statistics
 
-avg_math = round(df["Math"].mean(), 2)
-avg_physics = round(df["Physics"].mean(), 2)
-avg_chemistry = round(df["Chemistry"].mean(), 2)
+avg_math = round(
 
-df["Total"] = (
-    df["Math"] +
-    df["Physics"] +
-    df["Chemistry"]
+    df["Math"].mean(),
+
+    2
+
 )
 
+avg_physics = round(
+
+    df["Physics"].mean(),
+
+    2
+
+)
+
+avg_chemistry = round(
+
+    df["Chemistry"].mean(),
+
+    2
+
+)
+
+# Topper and weak student
+
 topper = df.loc[
+
     df["Total"].idxmax(),
+
     "Name"
+
 ]
 
 weak_student = df.loc[
+
     df["Total"].idxmin(),
+
     "Name"
+
 ]
 
+# Convert student rows into dictionaries
+# so JavaScript can use them
+
 students = df.to_dict(
+
     orient="records"
+
 )
 
 @app.route("/")
+
 def home():
 
     return render_template(
@@ -54,4 +96,8 @@ def home():
 
 if __name__ == "__main__":
 
-    app.run(debug=True)
+    app.run(
+
+        debug=True
+
+    )
