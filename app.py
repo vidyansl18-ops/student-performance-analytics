@@ -3,22 +3,17 @@ import pandas as pd
 
 app = Flask(__name__)
 
-# Load dataset
 df = pd.read_csv("students.csv")
 
-# Total marks
 df["Total"] = df["Math"] + df["Physics"] + df["Chemistry"]
 
-# Statistics
 avg_math = round(df["Math"].mean(), 2)
 avg_physics = round(df["Physics"].mean(), 2)
 avg_chemistry = round(df["Chemistry"].mean(), 2)
 
-# Topper & weak student
 topper = df.loc[df["Total"].idxmax(), "Name"]
 weak_student = df.loc[df["Total"].idxmin(), "Name"]
 
-# Convert to frontend format
 students = df.to_dict(orient="records")
 
 @app.route("/")
