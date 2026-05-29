@@ -1,11 +1,12 @@
 body {
     margin: 0;
     font-family: 'Poppins', sans-serif;
-    scroll-behavior: smooth;
     background: #0f172a;
+    color: white;
+    scroll-behavior: smooth;
 }
 
-/* NAVBAR */
+/* HEADER */
 header {
     display: flex;
     justify-content: space-between;
@@ -17,21 +18,17 @@ header {
 
 .logo {
     color: #38bdf8;
-    font-weight: 700;
-    font-size: 18px;
+    font-weight: bold;
 }
 
 nav a {
     color: white;
-    margin: 0 12px;
+    margin: 0 10px;
     text-decoration: none;
-    font-weight: 500;
     padding: 6px 10px;
     border-radius: 6px;
-    transition: 0.3s;
 }
 
-/* HOVER EFFECT */
 nav a:hover {
     background: #38bdf8;
     color: black;
@@ -40,60 +37,20 @@ nav a:hover {
 /* HERO */
 .hero {
     text-align: center;
-    padding: 90px 20px;
+    padding: 80px;
     background: linear-gradient(135deg, #4f46e5, #06b6d4);
-    color: white;
 }
 
 /* SECTIONS */
 .section {
-    padding: 60px 40px;
-}
-
-/* DIFFERENT SECTION COLORS */
-.dashboard {
-    background: #1e293b;
-    color: white;
-}
-
-.notes {
-    background: #0b1220;
-    color: white;
-}
-
-.students {
-    background: #111827;
-    color: white;
-}
-
-.contact {
-    background: #0f172a;
-    color: white;
-    text-align: center;
-}
-
-/* CARDS */
-.cards {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 20px;
-}
-
-.card {
-    background: #334155;
-    padding: 20px;
-    border-radius: 12px;
-    text-align: center;
-    transition: 0.3s;
-}
-
-.card:hover {
-    transform: translateY(-5px);
-    background: #38bdf8;
-    color: black;
+    padding: 50px;
 }
 
 /* NOTES */
+.notes {
+    background: #1e293b;
+}
+
 .notes-grid {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
@@ -101,34 +58,57 @@ nav a:hover {
 }
 
 .note-card {
-    background: #1f2937;
+    background: #334155;
     padding: 20px;
-    border-radius: 12px;
-    text-align: center;
-    border: 1px solid #334155;
+    border-radius: 10px;
+}
+
+/* STUDENTS BAR */
+.student-bar {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.student-pill {
+    background: #1f2937;
+    padding: 10px 15px;
+    border-radius: 20px;
+    text-decoration: none;
+    color: white;
     transition: 0.3s;
 }
 
-.note-card:hover {
+.student-pill:hover {
     background: #38bdf8;
     color: black;
-    transform: scale(1.05);
 }
 
-/* TABLE */
-table {
-    width: 100%;
-    border-collapse: collapse;
+/* ANALYTICS BAR */
+.analytics-bar {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+}
+
+.graph-card {
+    background: #1f2937;
+    padding: 15px;
+    border-radius: 10px;
+    text-decoration: none;
+    color: white;
+    transition: 0.3s;
+}
+
+.graph-card:hover {
+    background: #38bdf8;
+    color: black;
+}
+
+/* CARD */
+.card {
+    background: #1f2937;
+    padding: 20px;
+    border-radius: 10px;
     margin-top: 20px;
-}
-
-th, td {
-    padding: 12px;
-    border: 1px solid #334155;
-    text-align: center;
-}
-
-th {
-    background: #38bdf8;
-    color: black;
 }
