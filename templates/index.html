@@ -1,46 +1,29 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <title>Student Performance Analytics</title>
+    <title>Student Performance Dashboard</title>
 
-    <!-- GOOGLE FONT -->
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
-
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 
 <body>
 
-<!-- NAVBAR -->
 <header>
     <div class="logo">📊 Student Analytics</div>
 
     <nav>
         <a href="#home">Home</a>
-        <a href="#dashboard">Dashboard</a>
         <a href="#notes">Notes</a>
         <a href="#students">Students</a>
-        <a href="#contact">Contact</a>
+        <a href="#analytics">Analytics</a>
     </nav>
 </header>
 
 <!-- HOME -->
 <section id="home" class="hero">
     <h1>Student Performance Dashboard</h1>
-    <p>Analyze marks, attendance, toppers & weak students visually</p>
-</section>
-
-<!-- DASHBOARD -->
-<section id="dashboard" class="section dashboard">
-    <h2>📈 Dashboard Overview</h2>
-
-    <div class="cards">
-        <div class="card">Total Students<br><b>15</b></div>
-        <div class="card">Top Score<br><b>99</b></div>
-        <div class="card">Avg Attendance<br><b>82%</b></div>
-        <div class="card">Subjects<br><b>3</b></div>
-    </div>
+    <p>Marks • Attendance • Analytics • Insights</p>
 </section>
 
 <!-- NOTES -->
@@ -55,27 +38,29 @@
     </div>
 </section>
 
-<!-- STUDENTS -->
+<!-- STUDENTS SECTION (MANDATORY) -->
 <section id="students" class="section students">
-    <h2>👨‍🎓 Student Records</h2>
+    <h2>👨‍🎓 Select Student</h2>
+    <p>Click a student to view details</p>
 
-    <table>
-        <tr>
-            <th>Name</th><th>Math</th><th>Physics</th><th>Chemistry</th><th>Attendance</th>
-        </tr>
-
-        <tr><td>Aarav</td><td>88</td><td>76</td><td>91</td><td>92</td></tr>
-        <tr><td>Diya</td><td>95</td><td>89</td><td>94</td><td>98</td></tr>
-        <tr><td>Rohan</td><td>45</td><td>52</td><td>48</td><td>68</td></tr>
-        <tr><td>Meera</td><td>91</td><td>95</td><td>89</td><td>97</td></tr>
-        <tr><td>Ananya</td><td>98</td><td>96</td><td>99</td><td>99</td></tr>
-    </table>
+    <div class="student-bar">
+        {% for s in students %}
+            <a class="student-pill" href="/student/{{ s.Name }}">
+                {{ s.Name }}
+            </a>
+        {% endfor %}
+    </div>
 </section>
 
-<!-- CONTACT -->
-<section id="contact" class="section contact">
-    <h2>Contact</h2>
-    <p>Built using Flask + Python + Data Analysis</p>
+<!-- ANALYTICS SECTION (MANDATORY) -->
+<section id="analytics" class="section analytics">
+    <h2>📊 Analytics Section</h2>
+
+    <div class="analytics-bar">
+        <a class="graph-card" href="/analytics">📈 Avg Performance</a>
+        <a class="graph-card" href="/analytics">🏆 Top Students</a>
+        <a class="graph-card" href="/analytics">⚠ Weak Students</a>
+    </div>
 </section>
 
 </body>
