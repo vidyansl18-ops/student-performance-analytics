@@ -4,27 +4,36 @@ body {
     background: #f4f6f9;
 }
 
-/* NAVBAR */
+/* NAVBAR FLEXBOX */
 .navbar {
     position: fixed;
     top: 0;
     width: 100%;
     background: #1e1e2f;
     display: flex;
-    justify-content: center;
-    gap: 30px;
-    padding: 15px;
-    z-index: 1000;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 40px;
 }
 
-.navbar a {
+.logo {
+    color: white;
+    font-weight: 600;
+    font-size: 18px;
+}
+
+.nav-links {
+    display: flex;
+    gap: 25px;
+}
+
+.nav-links a {
     color: white;
     text-decoration: none;
     transition: 0.3s;
-    font-weight: 500;
 }
 
-.navbar a:hover {
+.nav-links a:hover {
     color: #ffcc00;
 }
 
@@ -38,44 +47,50 @@ body {
 
 /* SECTIONS */
 section {
-    padding: 80px 40px;
+    padding: 80px 50px;
 }
 
 /* CARDS */
 .card {
     background: white;
     padding: 20px;
-    border-radius: 12px;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    border-radius: 15px;
     margin-top: 15px;
+    box-shadow: 0 6px 15px rgba(0,0,0,0.1);
 }
 
-/* SELECT BOX */
+/* SELECT */
 select {
     padding: 10px;
-    width: 250px;
     margin-top: 10px;
 }
 
-/* IMAGES */
-img {
-    width: 420px;
-    margin: 10px;
+/* GRAPHS */
+.graph-box img {
+    width: 500px;
+    display: none;
+    margin-top: 20px;
     border-radius: 10px;
 }
 
-/* NOTES */
+/* NOTES BIG CARDS */
 .notes {
     display: flex;
+    gap: 25px;
     flex-wrap: wrap;
-    gap: 20px;
 }
 
 .note-card {
-    width: 200px;
+    width: 250px;
+    height: 150px;
     background: white;
     padding: 20px;
-    border-radius: 10px;
+    border-radius: 15px;
+    box-shadow: 0 6px 15px rgba(0,0,0,0.1);
+    font-size: 18px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     transition: 0.3s;
     cursor: pointer;
 }
