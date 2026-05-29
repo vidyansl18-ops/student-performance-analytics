@@ -1,35 +1,287 @@
-<!-- ANALYTICS -->
-<section id="analytics">
+<!DOCTYPE html>
+<html>
 
-    <h2 class="analytics-title">Analytics Summary</h2>
+<head>
 
-    <div class="analytics-container">
+    <title>Edulytics Dashboard</title>
 
-        <div class="analytics-card blue">
-            <h3>📘 Avg Math</h3>
-            <p>{{ avg_math }}</p>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+
+</head>
+
+<body>
+
+    <!-- NAVBAR -->
+    <div class="navbar">
+
+        <div class="logo">
+            Edulytics
         </div>
 
-        <div class="analytics-card purple">
-            <h3>⚛️ Avg Physics</h3>
-            <p>{{ avg_physics }}</p>
-        </div>
+        <div class="nav-links">
 
-        <div class="analytics-card pink">
-            <h3>🧪 Avg Chemistry</h3>
-            <p>{{ avg_chemistry }}</p>
-        </div>
+            <a href="#home">Home</a>
+            <a href="#students">Students</a>
+            <a href="#analytics">Analytics</a>
+            <a href="#graphs">Graphs</a>
+            <a href="#notes">Notes</a>
 
-        <div class="analytics-card green">
-            <h3>🏆 Topper</h3>
-            <p>{{ topper }}</p>
-        </div>
-
-        <div class="analytics-card orange">
-            <h3>📉 Weak Student</h3>
-            <p>{{ weak_student }}</p>
         </div>
 
     </div>
 
-</section>
+    <!-- HERO SECTION -->
+    <section id="home" class="hero">
+
+        <h1>Student Performance Dashboard</h1>
+
+        <p>
+            Analytics • Insights • Smart Learning
+        </p>
+
+    </section>
+
+    <!-- STUDENT SECTION -->
+    <section id="students">
+
+        <h2>Student Details</h2>
+
+        <select onchange="showStudent(this.value)">
+
+            <option>Select Student</option>
+
+            {% for s in students %}
+            <option value="{{ loop.index0 }}">
+                {{ s.Name }}
+            </option>
+            {% endfor %}
+
+        </select>
+
+        <div id="studentInfo" class="card">
+
+            Select a student to view details
+
+        </div>
+
+    </section>
+
+    <!-- ANALYTICS SECTION -->
+    <section id="analytics">
+
+        <h2>Analytics Summary</h2>
+
+        <div class="analytics-container">
+
+            <div class="analytics-card blue">
+
+                <h3>📘 Avg Math</h3>
+
+                <p>{{ avg_math }}</p>
+
+            </div>
+
+            <div class="analytics-card purple">
+
+                <h3>⚛️ Avg Physics</h3>
+
+                <p>{{ avg_physics }}</p>
+
+            </div>
+
+            <div class="analytics-card pink">
+
+                <h3>🧪 Avg Chemistry</h3>
+
+                <p>{{ avg_chemistry }}</p>
+
+            </div>
+
+            <div class="analytics-card green">
+
+                <h3>🏆 Topper</h3>
+
+                <p>{{ topper }}</p>
+
+            </div>
+
+            <div class="analytics-card orange">
+
+                <h3>📉 Weak Student</h3>
+
+                <p>{{ weak_student }}</p>
+
+            </div>
+
+        </div>
+
+    </section>
+
+    <!-- GRAPH SECTION -->
+    <section id="graphs">
+
+        <h2>Graphs Viewer</h2>
+
+        <select onchange="showGraph(this.value)">
+
+            <option>Select Graph</option>
+
+            <option value="g1">Average Scores</option>
+
+            <option value="g2">Student Attendance</option>
+
+            <option value="g3">Total Marks</option>
+
+            <option value="g4">Weak vs Strong</option>
+
+        </select>
+
+        <div class="graph-box">
+
+            <img id="g1"
+                src="{{ url_for('static', filename='average_scores.png') }}">
+
+            <img id="g2"
+                src="{{ url_for('static', filename='student_attendance.png') }}">
+
+            <img id="g3"
+                src="{{ url_for('static', filename='total_marks.png') }}">
+
+            <img id="g4"
+                src="{{ url_for('static', filename='s_W_performance.png') }}">
+
+        </div>
+
+    </section>
+
+    <!-- NOTES SECTION -->
+    <section id="notes">
+
+        <h2>Notes Section</h2>
+
+        <div class="notes-container">
+
+            <!-- MATH -->
+            <div class="note-card math">
+
+                <div class="note-icon">
+                    📘
+                </div>
+
+                <h3>Math Notes</h3>
+
+                <p>
+                    Formulas, tricks and solved examples.
+                </p>
+
+                <button>
+                    Open Notes →
+                </button>
+
+            </div>
+
+            <!-- PHYSICS -->
+            <div class="note-card physics">
+
+                <div class="note-icon">
+                    ⚛️
+                </div>
+
+                <h3>Physics Notes</h3>
+
+                <p>
+                    Concepts, numericals and derivations.
+                </p>
+
+                <button>
+                    Open Notes →
+                </button>
+
+            </div>
+
+            <!-- CHEMISTRY -->
+            <div class="note-card chemistry">
+
+                <div class="note-icon">
+                    🧪
+                </div>
+
+                <h3>Chemistry Notes</h3>
+
+                <p>
+                    Reactions, equations and shortcuts.
+                </p>
+
+                <button>
+                    Open Notes →
+                </button>
+
+            </div>
+
+            <!-- ATTENDANCE -->
+            <div class="note-card attendance">
+
+                <div class="note-icon">
+                    📅
+                </div>
+
+                <h3>Attendance Tips</h3>
+
+                <p>
+                    Improve consistency and attendance.
+                </p>
+
+                <button>
+                    View Tips →
+                </button>
+
+            </div>
+
+        </div>
+
+    </section>
+
+    <script>
+
+        const students = {{ students | tojson }};
+
+        function showStudent(i) {
+
+            let s = students[i];
+
+            document.getElementById("studentInfo").innerHTML =
+
+                "<h3>" + s.Name + "</h3>" +
+
+                "<p>Math: " + s.Math + "</p>" +
+
+                "<p>Physics: " + s.Physics + "</p>" +
+
+                "<p>Chemistry: " + s.Chemistry + "</p>" +
+
+                "<p>Attendance: " + s.Attendance + "</p>" +
+
+                "<p>Total: " + s.Total + "</p>";
+        }
+
+        function showGraph(id) {
+
+            let graphs = ["g1", "g2", "g3", "g4"];
+
+            graphs.forEach(g => {
+
+                document.getElementById(g).style.display = "none";
+
+            });
+
+            document.getElementById(id).style.display = "block";
+        }
+
+    </script>
+
+</body>
+
+</html>
