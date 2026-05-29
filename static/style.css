@@ -1,114 +1,104 @@
-body {
-    margin: 0;
-    font-family: 'Poppins', sans-serif;
-    background: #0f172a;
-    color: white;
-    scroll-behavior: smooth;
-}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Student Performance Analytics</title>
 
-/* HEADER */
-header {
-    display: flex;
-    justify-content: space-between;
-    padding: 15px 40px;
-    background: #111827;
-    position: sticky;
-    top: 0;
-}
+    <!-- Google Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
 
-.logo {
-    color: #38bdf8;
-    font-weight: bold;
-}
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 
-nav a {
-    color: white;
-    margin: 0 10px;
-    text-decoration: none;
-    padding: 6px 10px;
-    border-radius: 6px;
-}
+</head>
 
-nav a:hover {
-    background: #38bdf8;
-    color: black;
-}
+<body>
 
-/* HERO */
-.hero {
-    text-align: center;
-    padding: 80px;
-    background: linear-gradient(135deg, #4f46e5, #06b6d4);
-}
+<!-- NAVBAR -->
+<div class="navbar">
+    <a href="#home">Home</a>
+    <a href="#students">Students</a>
+    <a href="#analytics">Analytics</a>
+    <a href="#notes">Notes</a>
+</div>
 
-/* SECTIONS */
-.section {
-    padding: 50px;
-}
+<!-- HERO -->
+<section id="home" class="hero">
+    <h1>Student Performance Dashboard</h1>
+    <p>Analytics • Insights • Visualization</p>
+</section>
 
-/* NOTES */
-.notes {
-    background: #1e293b;
-}
+<!-- STUDENT SECTION -->
+<section id="students">
 
-.notes-grid {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 15px;
-}
+    <h2>Student Details</h2>
 
-.note-card {
-    background: #334155;
-    padding: 20px;
-    border-radius: 10px;
-}
+    <select onchange="showStudent(this.value)">
+        <option>Select Student</option>
+        {% for s in students %}
+        <option value="{{ loop.index0 }}">{{ s.Name }}</option>
+        {% endfor %}
+    </select>
 
-/* STUDENTS BAR */
-.student-bar {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 10px;
-}
+    <div id="studentInfo" class="card">
+        Select a student to view details
+    </div>
 
-.student-pill {
-    background: #1f2937;
-    padding: 10px 15px;
-    border-radius: 20px;
-    text-decoration: none;
-    color: white;
-    transition: 0.3s;
-}
+</section>
 
-.student-pill:hover {
-    background: #38bdf8;
-    color: black;
-}
+<!-- ANALYTICS SECTION -->
+<section id="analytics">
 
-/* ANALYTICS BAR */
-.analytics-bar {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 15px;
-}
+    <h2>Statistics</h2>
 
-.graph-card {
-    background: #1f2937;
-    padding: 15px;
-    border-radius: 10px;
-    text-decoration: none;
-    color: white;
-    transition: 0.3s;
-}
+    <div class="card">
+        <p>Average Math: {{ avg_math }}</p>
+        <p>Average Physics: {{ avg_physics }}</p>
+        <p>Average Chemistry: {{ avg_chemistry }}</p>
+        <p><b>Topper:</b> {{ topper }}</p>
+        <p><b>Weak Student:</b> {{ weak_student }}</p>
+    </div>
 
-.graph-card:hover {
-    background: #38bdf8;
-    color: black;
-}
+    <h2>Graphs</h2>
 
-/* CARD */
-.card {
-    background: #1f2937;
-    padding: 20px;
-    border-radius: 10px;
-    margin-top: 20px;
-}
+    <!-- YOUR REAL GRAPHS -->
+    <img src="{{ url_for('static', filename='average_scores.png') }}">
+    <img src="{{ url_for('static', filename='student_attendance.png') }}">
+    <img src="{{ url_for('static', filename='total_marks.png') }}">
+    <img src="{{ url_for('static', filename='s_W_performance.png') }}">
+
+</section>
+
+<!-- NOTES SECTION -->
+<section id="notes">
+
+    <h2>Notes Section</h2>
+
+    <div class="notes">
+
+        <div class="note-card">Math Notes</div>
+        <div class="note-card">Physics Notes</div>
+        <div class="note-card">Chemistry Notes</div>
+        <div class="note-card">Attendance Tips</div>
+
+    </div>
+
+</section>
+
+<!-- ONLY REQUIRED JS -->
+<script>
+    const students = {{ students | tojson }};
+
+    function showStudent(index) {
+        let s = students[index];
+
+        document.getElementById("studentInfo").innerHTML =
+            "<h3>" + s.Name + "</h3>" +
+            "<p>Math: " + s.Math + "</p>" +
+            "<p>Physics: " + s.Physics + "</p>" +
+            "<p>Chemistry: " + s.Chemistry + "</p>" +
+            "<p>Attendance: " + s.Attendance + "</p>" +
+            "<p>Total: " + s.Total + "</p>";
+    }
+</script>
+
+</body>
+</html>
